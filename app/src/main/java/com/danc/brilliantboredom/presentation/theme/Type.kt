@@ -1,4 +1,4 @@
-package com.danc.brilliantboredom.ui.theme
+package com.danc.brilliantboredom.presentation.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
