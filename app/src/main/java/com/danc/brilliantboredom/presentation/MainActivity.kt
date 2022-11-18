@@ -6,18 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.danc.brilliantboredom.R
 import com.danc.brilliantboredom.presentation.components.BoredActivityItem
 import com.danc.brilliantboredom.presentation.theme.BrilliantBoredomTheme
 import com.danc.brilliantboredom.presentation.viewmodel.GetBoredActivitiesViewModel
@@ -47,7 +49,10 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Scaffold(
-                    scaffoldState = scaffoldState
+                    scaffoldState = scaffoldState,
+                    bottomBar = {
+                        SearchButton(viewModel)
+                    }
                 ) {
                     Box(
                         modifier = Modifier.background(MaterialTheme.colors.background)
@@ -59,11 +64,11 @@ class MainActivity : ComponentActivity() {
                         ) {
                             Text(
                                 modifier = Modifier.fillMaxWidth(),
-                                text = "CREATIVE SELF",
+                                text = stringResource(id = R.string.header),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 20.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.Black
+                                color = MaterialTheme.colors.primary
 
                             )
 
@@ -71,11 +76,11 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(10.dp),
-                                text = "How spacing out can UNLOCK your most PRODUCTIVE and CREATIVE SELF",
+                                text = stringResource(id = R.string.header_description),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 15.sp,
                                 textAlign = TextAlign.Center,
-                                color = Color.Black
+                                color = MaterialTheme.colors.primary
 
                             )
                             LazyColumn(
@@ -84,7 +89,7 @@ class MainActivity : ComponentActivity() {
                                 items(state.boredActivity.size) { index ->
                                     val boredActivity = state.boredActivity[index]
                                     BoredActivityItem(boredActivity = boredActivity, bookmark = {
-
+                                        viewModel.bookmarkActivity(boredActivity.toBookmarked())
                                     })
                                 }
                             }
@@ -92,6 +97,27 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun SearchButton(viewModel: GetBoredActivitiesViewModel) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.End
+    ) {
+        Button(modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .padding(16.dp),
+            onClick = {
+                viewModel.onGetBoredActivity()
+            }) {
+            Text(
+                style = TextStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Normal),
+                text = stringResource(R.string.get_new_activity).uppercase()
+            )
         }
     }
 }

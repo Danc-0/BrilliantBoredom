@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Brilliant Boredom</string>
-    <string name="bookmark_icon">Bookmark Icon</string>
+    <string name="header">Creative Self</string>
+    <string name="header_description">"How spacing out can UNLOCK your most PRODUCTIVE and CREATIVE SELF"</string>
+    <string name="learn_more">Learn More:</string>
+    <string name="get_new_activity">"Get New Activity"</string>
 </resources>

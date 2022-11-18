@@ -24,7 +24,8 @@ data class BoredomActivityEntity(
             price = price,
             activity = activity,
             key = primaryKey,
-            type = type
+            type = type,
+            link = link
         )
     }
 }

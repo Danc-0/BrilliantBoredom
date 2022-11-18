@@ -3,6 +3,7 @@ package com.danc.brilliantboredom.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.danc.brilliantboredom.data.local.dao.BoredomActivityDao
+import com.danc.brilliantboredom.data.local.entity.BookmarkedEntity
 import com.danc.brilliantboredom.data.local.entity.BoredomActivityEntity
 
 /**
@@ -13,10 +14,13 @@ import com.danc.brilliantboredom.data.local.entity.BoredomActivityEntity
  * 2. Must be an abstract class that extends the RoomDatabase
  * 3. For each DAO that is associated with this class it must be an abstract method that has no arguments and returns an instance of the DAO class */
 @Database(
-    entities = [BoredomActivityEntity::class],
-    version = 1
+    entities = [
+        BoredomActivityEntity::class,
+        BookmarkedEntity::class
+    ],
+    version = 2,
 )
-abstract class BoredActivityDatabase(): RoomDatabase() {
+abstract class BoredActivityDatabase() : RoomDatabase() {
 
     abstract val boredomActivityDao: BoredomActivityDao
 

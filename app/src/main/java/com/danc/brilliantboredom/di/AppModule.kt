@@ -2,10 +2,13 @@ package com.danc.brilliantboredom.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.danc.brilliantboredom.data.local.BoredActivityDatabase
 import com.danc.brilliantboredom.data.remote.BoredomAPI
 import com.danc.brilliantboredom.data.repositories.BoredomActivityRepositoryImpl
 import com.danc.brilliantboredom.domain.repositories.BoredomActivityRepository
+import com.danc.brilliantboredom.domain.usecases.AddActivityToBookmarks
 import com.danc.brilliantboredom.domain.usecases.GetBoredActivities
 import dagger.Module
 import dagger.Provides
@@ -25,18 +28,33 @@ object AppModule {
     @Provides
     @Singleton
     fun provideBoredActivitiesUseCase(repository: BoredomActivityRepository): GetBoredActivities {
-        return GetBoredActivities(
-            repository = repository
-        )
+        return GetBoredActivities(repository)
     }
 
     @Provides
     @Singleton
-    fun provideRepository(boredomAPI: BoredomAPI, boredActivityDatabase: BoredActivityDatabase): BoredomActivityRepository {
+    fun provideBookmarkedActivityUseCase(repository: BoredomActivityRepository): AddActivityToBookmarks {
+        return AddActivityToBookmarks(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(
+        boredomAPI: BoredomAPI,
+        boredActivityDatabase: BoredActivityDatabase
+    ): BoredomActivityRepository {
         return BoredomActivityRepositoryImpl(
             boredomAPI = boredomAPI,
             boredomActivityDao = boredActivityDatabase.boredomActivityDao
         )
+    }
+
+    private val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "CREATE TABLE IF NOT EXISTS `BookmarkedEntity` (`key` TEXT NOT NULL, `activity` TEXT NOT NULL, `type` TEXT NOT NULL, `price` FLOAT NOT NULL, PRIMARY KEY(`key`))"
+            )
+        }
     }
 
     @Provides
@@ -46,7 +64,9 @@ object AppModule {
             application,
             BoredActivityDatabase::class.java,
             "bored_activity"
-        ).build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     private val loggingInterceptor: HttpLoggingInterceptor =
