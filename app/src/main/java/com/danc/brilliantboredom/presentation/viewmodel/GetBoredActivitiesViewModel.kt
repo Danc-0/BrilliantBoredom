@@ -56,19 +56,19 @@ class GetBoredActivitiesViewModel @Inject constructor(
                         is Resource.Loading -> {
                             _state.value = state.value.copy(
                                 boredActivity = response.data ?: emptyList(),
-                                isLoading = false
-                            )
-                            _eventFlow.emit(
-                                UIEvent.ShowSnackBar(
-                                    response.message ?: "Unknown"
-                                )
+                                isLoading = true
                             )
                         }
 
                         is Resource.Error -> {
                             _state.value = state.value.copy(
                                 boredActivity = response.data ?: emptyList(),
-                                isLoading = true
+                                isLoading = false
+                            )
+                            _eventFlow.emit(
+                                UIEvent.ShowSnackBar(
+                                    response.message ?: "Unknown"
+                                )
                             )
                         }
                     }
