@@ -16,3 +16,5 @@ To run the project you should have the following tools
 * MVVM and Clean architeture.
 
 ## Screenshots
+|<img src="screenshots/light_mode.jpeg" width=200/>|<img src="screenshots/dark_mode.jpeg" width=200/>|
+|:----:|:----:|
