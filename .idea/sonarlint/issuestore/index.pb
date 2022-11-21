@@ -1,6 +1,4 @@
 
-<
-build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 m
 =app/src/main/java/com/danc/brilliantboredom/utils/Resource.kt,4/1/4180582e663e449107b8de5ab95fecc4eba59d77
 n
@@ -21,11 +19,13 @@ k
 Oapp/src/main/java/com/danc/brilliantboredom/data/local/BoredActivityDatabase.kt,6/d/6df2a7bdb1efd0c307e0e88d84199085c3c0b778
 …
 Uapp/src/main/java/com/danc/brilliantboredom/domain/usecases/AddActivityToBookmarks.kt,4/e/4e0da1cd4592f7f757e5499d370673cdfb58b57a
-
-Qapp/src/main/java/com/danc/brilliantboredom/domain/usecases/GetBoredActivities.kt,a/4/a42423326b622a56ee11d014c3164c1fa8d82bd0
 Œ
 \app/src/main/java/com/danc/brilliantboredom/domain/repositories/BoredomActivityRepository.kt,e/d/ed9e8c9de17485b4462feb127f5fc9a008c5b12f
 w
 Gapp/src/main/java/com/danc/brilliantboredom/domain/models/Bookmarked.kt,9/e/9e7e883e9711734e0fe6ee70eb301c49c6186c50
 Ž
 ^app/src/main/java/com/danc/brilliantboredom/data/repositories/BoredomActivityRepositoryImpl.kt,c/f/cfc05ad66e1f02c339e8b79b9776b769e9289dd4
+x
+Happ/src/main/java/com/danc/brilliantboredom/presentation/MainActivity.kt,3/2/3286a8930b28fe16dec05812006a3ac187372888
+ˆ
+Xapp/src/main/java/com/danc/brilliantboredom/presentation/components/BoredActivityItem.kt,3/d/3d77f7d04946bb066bfc57087e91ce9943243e0a
